@@ -34,10 +34,10 @@ const validateUpload = (req,res,next)=>{
 
 };
 
-const validateField = (req,res,next) => {
-    const {filedID} = req.params;
+const validateFileId = (req,res,next) => {
+    const {fileID} = req.params;
 
-    if (!filedID){
+    if (!fileID){
         return res.status(400).json({
             success: false,
             error: 'No field ID'
@@ -46,7 +46,7 @@ const validateField = (req,res,next) => {
     //check the uuid format
     const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-    if(!uuidRegex.test(filedID)){
+    if(!uuidRegex.test(fileID)){
         return res.status(400).json({
             success : false,
             error: 'Invalid file uuid format'
@@ -55,4 +55,4 @@ const validateField = (req,res,next) => {
     next();
 };
 
-export default {validateField,validateUpload}
+export {validateUpload,validateFileId};

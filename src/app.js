@@ -3,7 +3,7 @@ import cors from 'cors'
 
 const app = express();
 
-// import fileRoutes from './routes/fileRoutes';
+import fileRoutes from './routes/fileRoute.js';
 
 import errorHandler from './middleware/errorHandler.js';
 
@@ -27,7 +27,7 @@ app.get('/health',(req,res)=>{
     });
 });
 
-// app.use('/api/files',fileRoutes);
+app.use('/api/files',fileRoutes);
 
 app.use((req,res)=>{
     res.status(404).json({
