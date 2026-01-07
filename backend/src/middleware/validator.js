@@ -22,10 +22,10 @@ const validateUpload = (req,res,next)=>{
     }
 
     const estimatedSize = (encryptedFile.length * 3) / 4;
-    if (estimatedSize > 50) {
+    if (estimatedSize > 52428800) {
         return res.status(413).json({
             success: false,
-            error: `File too large. Max size: ${50 / 1024 / 1024}MB`,
+            error: `File too large. Max size: ${52428800 / 1024 / 1024}MB`,
             yourFileSize: `${(estimatedSize / 1024 / 1024).toFixed(2)}MB`
         });
     }
@@ -35,9 +35,9 @@ const validateUpload = (req,res,next)=>{
 };
 
 const validateFileId = (req,res,next) => {
-    const {fileID} = req.params;
+    const {fileId} = req.params;
 
-    if (!fileID){
+    if (!fileId){
         return res.status(400).json({
             success: false,
             error: 'No field ID'
@@ -46,7 +46,7 @@ const validateFileId = (req,res,next) => {
     //check the uuid format
     const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-    if(!uuidRegex.test(fileID)){
+    if(!uuidRegex.test(fileId)){
         return res.status(400).json({
             success : false,
             error: 'Invalid file uuid format'

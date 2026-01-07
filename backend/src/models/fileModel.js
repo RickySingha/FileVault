@@ -5,9 +5,10 @@ const fileStore = new Map();
 
 class FileModel {
     static async create(fileData){
-        const fileID = uuidv4();
+        const fileId = uuidv4();
+        console.log(fileId);
         const record = {
-            fileID,
+            fileId,
             filename: fileData.filename,
             salt: fileData.salt,
             wrappedKey : fileData.wrappedKey,
@@ -16,19 +17,19 @@ class FileModel {
             downloadCount: 0,
             lastDownloadedAt: null
         };
-        fileStore.set(fileID,record);
+        fileStore.set(fileId,record);
         console.log('Stored in db');
         return record;
     };
 
-    static async findById(fileID){
-        const file = fileStore.get(fileID);
+    static async findById(fileId){
+        const file = fileStore.get(fileId);
 
         return file || null;
     }
     
     // increment download count
-    static async incrementDownloadCount(fileID) {
+    static async incrementDownloadCount(fileId) {
         const file = fileStore.get(fileId);
         
         if (file) {
@@ -43,8 +44,8 @@ class FileModel {
     }
     // delete file
     
-    static async deleteById(fileID){
-        const deleted = fileStore.delete(fileID);
+    static async deleteById(fileId){
+        const deleted = fileStore.delete(fileId);
         if(deleted){
             console.log('File deleted');
         }

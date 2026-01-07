@@ -22,8 +22,8 @@ app.use((req,res,next)=>{
 app.get('/health',(req,res)=>{
     res.json({
         status: 'ok',
-        timestamp : new Date().toISOString,
-        uptime: process.uptime
+        timestamp : new Date().toISOString(),
+        uptime: process.uptime()
     });
 });
 
