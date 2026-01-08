@@ -1,0 +1,256 @@
+/* styles.css - Frontend Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════ */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    color: #333;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* ═══════════════════════════════════════
+   LAYOUT
+   ═══════════════════════════════════════ */
+.sections-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .sections-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ═══════════════════════════════════════
+   CARDS
+   ═══════════════════════════════════════ */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #4CAF50;
+}
+
+.full-width-card {
+    grid-column: 1 / -1;
+}
+
+/* ═══════════════════════════════════════
+   FORMS
+   ═══════════════════════════════════════ */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+    font-size: 14px;
+}
+
+input[type="file"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+/* ═══════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════ */
+button {
+    width: 100%;
+    padding: 14px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover:not(:disabled) {
+    background: #45a049;
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+button.secondary {
+    background: #2196F3;
+    margin-top: 10px;
+}
+
+button.secondary:hover:not(:disabled) {
+    background: #0b7dda;
+}
+
+/* ═══════════════════════════════════════
+   FILE INFO
+   ═══════════════════════════════════════ */
+.file-info {
+    background: #e3f2fd;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-size: 13px;
+    display: none;
+    border-left: 4px solid #2196F3;
+}
+
+.file-info.show {
+    display: block;
+}
+
+/* ═══════════════════════════════════════
+   LOADING
+   ═══════════════════════════════════════ */
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    display: none;
+}
+
+.loading.show {
+    display: block;
+}
+
+/* ═══════════════════════════════════════
+   RESULTS
+   ═══════════════════════════════════════ */
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    display: none;
+    line-height: 1.6;
+}
+
+.result.show {
+    display: block;
+}
+
+.result.success {
+    background: #d4edda;
+    border-left: 4px solid #28a745;
+    color: #155724;
+}
+
+.result.error {
+    background: #f8d7da;
+    border-left: 4px solid #dc3545;
+    color: #721c24;
+}
+
+.result.info {
+    background: #d1ecf1;
+    border-left: 4px solid #17a2b8;
+    color: #0c5460;
+}
+
+/* ═══════════════════════════════════════
+   NOTES
+   ═══════════════════════════════════════ */
+.note {
+    background: #fff3cd;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-top: 20px;
+    border-left: 4px solid #ffc107;
+    color: #856404;
+}
+
+/* ═══════════════════════════════════════
+   INFO SECTION
+   ═══════════════════════════════════════ */
+.info-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .info-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+.file-details {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.file-details div {
+    padding: 8px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.file-details div:last-child {
+    border-bottom: none;
+}
+
+.file-details strong {
+    color: #333;
+    display: inline-block;
+    width: 140px;
+}

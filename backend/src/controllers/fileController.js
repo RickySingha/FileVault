@@ -48,7 +48,7 @@ export const downloadFile = async (req, res, next) => {
         // Step 1: Get fileId from URL params
         const { fileId } = req.params;
 
-        console.log(`📥 Downloading file: ${fileId}`);
+        
 
         // Step 2: Fetch from database
         const file = await FileModel.findById(fileId);
@@ -61,13 +61,10 @@ export const downloadFile = async (req, res, next) => {
                 error: 'File not found'
             });
         }
+        
 
-        // Step 4: Increment download counter
-        await FileModel.incrementDownloadCount(fileId);
 
-        console.log(`✅ File found: ${file.filename}`);
-
-        // Step 5: Return file data
+        // Step 4: Return file data
         res.json({
             success: true,
             data: {
@@ -81,6 +78,31 @@ export const downloadFile = async (req, res, next) => {
 
     } catch (error) {
         console.error('❌ Download error:', error);
+        next(error);
+    }
+};
+
+export const confirmDownload = async (req,res,next) => {
+    try {
+        const {fileId} = req.params;
+        const file = await FileModel.findById(fileId);
+        if(!fileId){
+            return res(403).json({
+                success : 'false',
+                error: 'File not found'
+            });
+        }
+        console.log(`📥 Downloading file: ${fileId}`);
+        await FileModel.incrementDownloadCount(fileId);
+        console.log(`Download confirmed for ${fileId}`);
+        
+        res.json({ 
+            success: true,
+            message: 'Download confirmed',
+            downloadCount: file.downloadCount + 1
+        });
+        
+    } catch (error) {
         next(error);
     }
 };
