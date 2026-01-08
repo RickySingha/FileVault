@@ -68,7 +68,7 @@ export const downloadFile = async (req, res, next) => {
         res.json({
             success: true,
             data: {
-                filename: file.filename,
+                filename: file.fileName,
                 salt: file.salt,
                 wrappedKey: file.wrappedKey,
                 encryptedFile: file.encryptedFile,
@@ -128,7 +128,7 @@ export const getFileInfo = async (req, res, next) => {
             success: true,
             data: {
                 fileId: file.fileId,
-                filename: file.filename,
+                filename: file.fileName,
                 uploadedAt: file.uploadedAt,
                 downloadCount: file.downloadCount,
                 fileSize: Math.round((file.encryptedFile.length * 3) / 4) // Estimate

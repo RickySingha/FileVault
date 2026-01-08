@@ -1,5 +1,10 @@
 // import express from 'express'
 import app from './src/app.js';
+import pool from './src/config/database.js';
+
+await pool.query('SELECT NOW()');
+
+console.log('Database connected successfully');
 const port = 3000
 const server = app.listen(port, () => {
     console.log(`Server running on port ${port}`);
