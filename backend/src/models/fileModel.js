@@ -61,7 +61,7 @@ class FileModel {
                 fileId : file.file_id,
                 fileName: file.filename,
                 salt:file.salt,
-                wrappedKey: file.wrappedKey,
+                wrappedKey: file.wrapped_key,
                 encryptedFile  :file.encrypted_file,
                 fileSize : file.file_size,
                 uploadedAt : file.uploaded_at,

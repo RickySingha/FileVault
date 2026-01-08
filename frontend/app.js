@@ -188,6 +188,14 @@ window.downloadFile = async function() {
         }
 
         console.log('🔓 Step 2: Converting base64 data...');
+
+//         document.body.innerHTML += `
+//   <div style="background:black; color:lime; padding:20px; font-family:monospace; border:3px solid red;">
+//     <h3>DEBUG DATA</h3>
+//     <p><b>Type:</b> ${typeof data.data.wrappedKey}</p>
+//     <p><b>Raw Content:</b> ${data.data.wrappedKey}</p>
+//   </div>
+// `;
         const salt = base64ToArray(data.data.salt);
         const wrappedKey = base64ToArray(data.data.wrappedKey);
         const encryptedFile = base64ToArray(data.data.encryptedFile);

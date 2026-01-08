@@ -28,7 +28,7 @@ export const uploadFile = async (req, res, next) => {
             message: 'File uploaded successfully',
             data: {
                 fileId: file.fileId,
-                filename: file.filename,
+                filename: file.fileName,
                 uploadedAt: file.uploadedAt
             }
         });
