@@ -15,7 +15,7 @@ import {
 // ═══════════════════════════════════════
 // CONFIGURATION
 // ═══════════════════════════════════════
-const API_URL = 'http://localhost:3000/api/files';
+const API_URL = 'https://file-vault-api.onrender.com/api/files';
 
 // ═══════════════════════════════════════
 // UTILITY FUNCTIONS
