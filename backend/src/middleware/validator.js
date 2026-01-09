@@ -1,3 +1,4 @@
+import constants from '../config/constants.js';
 const validateUpload = (req,res,next)=>{
     const {filename,salt,wrappedKey,encryptedFile} = req.body;
 
@@ -22,10 +23,10 @@ const validateUpload = (req,res,next)=>{
     }
 
     const estimatedSize = (encryptedFile.length * 3) / 4;
-    if (estimatedSize > 52428800) {
+    if (estimatedSize > constants.MAX_FILE_SIZE) {
         return res.status(413).json({
             success: false,
-            error: `File too large. Max size: ${52428800 / 1024 / 1024}MB`,
+            error: `File too large. Max size: ${MAX_FILE_SIZE/ 1024 / 1024}MB`,
             yourFileSize: `${(estimatedSize / 1024 / 1024).toFixed(2)}MB`
         });
     }

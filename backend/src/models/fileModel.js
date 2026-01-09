@@ -27,6 +27,7 @@ class FileModel {
             const result = await pool.query(query,record);
             console.log(`${fileId} data inserted into database`);
             const file = result.rows[0];
+            //return in camelcase for parsing into other files
             return {
                 fileId : file.file_id,
                 fileName: file.filename,
@@ -57,6 +58,7 @@ class FileModel {
                 return null;
             }
             const file = result.rows[0];
+            //return in camelcase for parsing into other files
             return {
                 fileId : file.file_id,
                 fileName: file.filename,
@@ -95,7 +97,7 @@ class FileModel {
         }
         
     }
-    // delete file
+    // delete file not implemented into db yet
     
     static async deleteById(fileId){
         const deleted = fileStore.delete(fileId);

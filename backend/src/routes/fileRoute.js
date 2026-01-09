@@ -5,11 +5,12 @@ const router = express.Router();
 import * as fileController from '../controllers/fileController.js';
 
 import {validateUpload,validateFileId} from '../middleware/validator.js';
+import {uploadLimiter,downloadLimiter} from '../middleware/rateLimit.js';
 
-router.post('/upload', validateUpload,fileController.uploadFile);
+router.post('/upload', uploadLimiter,validateUpload,fileController.uploadFile);
 
 router.get('/download/:fileId',validateFileId,fileController.downloadFile);
-router.post('/download/:fileId',validateFileId,fileController.confirmDownload);
+router.post('/download/:fileId',downloadLimiter,validateFileId,fileController.confirmDownload);
 
 router.get('/info/:fileId',validateFileId,fileController.getFileInfo);
 
