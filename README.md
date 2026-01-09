@@ -59,41 +59,41 @@ File Encryption Vault is a secure file storage system that encrypts files **in y
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                        CLIENT (Browser)                      │
-│                                                              │
+│                        CLIENT (Browser)                     │
+│                                                             │
 │  1. User selects file + enters password                     │
 │  2. Generate random file key (AES-GCM 256-bit)              │
 │  3. Encrypt file with file key                              │
 │  4. Derive master key from password (PBKDF2)                │
 │  5. Wrap file key with master key (AES-KW)                  │
 │  6. Send encrypted data to server                           │
-│                                                              │
-└──────────────────────┬───────────────────────────────────────┘
+│                                                             │
+└──────────────────────┬──────────────────────────────────────┘
                        │
                        │ HTTPS
                        │
                        ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                     SERVER (Backend API)                     │
-│                                                              │
+│                     SERVER (Backend API)                    │
+│                                                             │
 │  • Receives: encrypted file + wrapped key + salt            │
 │  • Stores: in PostgreSQL database                           │
 │  • Cannot decrypt: no password or master key                │
-│                                                              │
-└──────────────────────┬───────────────────────────────────────┘
+│                                                             │
+└──────────────────────┬──────────────────────────────────────┘
                        │
                        │
                        ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                  DATABASE (PostgreSQL)                       │
-│                                                              │
+│                  DATABASE (PostgreSQL)                      │
+│                                                             │
 │  Stores:                                                    │
 │  • file_id (UUID)                                           │
 │  • encrypted_file (Base64)                                  │
 │  • wrapped_key (Base64)                                     │
 │  • salt (Base64)                                            │
 │  • metadata (filename, timestamps)                          │
-│                                                              │
+│                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
