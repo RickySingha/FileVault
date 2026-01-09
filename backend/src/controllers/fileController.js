@@ -12,7 +12,7 @@ export const uploadFile = async (req, res, next) => {
 
         console.log(`📤 Uploading file: ${filename}`);
 
-        // Step 2: Save to database (model handles the details)
+        // Step 2: Send to file model to create the file and handle
         const file = await FileModel.create({
             filename,
             salt,
@@ -81,7 +81,7 @@ export const downloadFile = async (req, res, next) => {
         next(error);
     }
 };
-
+// To execute only if decryption was successfull
 export const confirmDownload = async (req,res,next) => {
     try {
         const {fileId} = req.params;

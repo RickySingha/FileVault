@@ -1,15 +1,16 @@
 import express from 'express'
 import cors from 'cors'
-
+import helmet from 'helmet';
 const app = express();
 
 import fileRoutes from './routes/fileRoute.js';
 
 import errorHandler from './middleware/errorHandler.js';
 
-app.use(cors());
+app.use(cors()); // To handle cross origin 
+app.use(helmet()); // for secure headers
 
-app.use(express.json({limit: '50mb'}));
+app.use(express.json({limit: '50mb'})); //file size limit
 
 app.use(express.urlencoded({extended : 'true', limit: '50mb'}));
 
@@ -27,6 +28,7 @@ app.get('/health',(req,res)=>{
     });
 });
 
+// api request enpoints
 app.use('/api/files',fileRoutes);
 
 app.use((req,res)=>{

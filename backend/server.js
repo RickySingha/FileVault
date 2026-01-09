@@ -1,20 +1,23 @@
 // import express from 'express'
+import 'dotenv/config';
 import app from './src/app.js';
 import pool from './src/config/database.js';
 
-await pool.query('SELECT NOW()');
+import constants from './src/config/constants.js';
 
-console.log('Database connected successfully');
-const port = 3000
-const server = app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-    // console.log(`📝 Environment: ${process.env.NODE_ENV}`);
-    // console.log(`🔗 http://localhost:${PORT}`);
+async function startServer(){ 
+  try{
+    await pool.query('SELECT 1');
+    console.log('Database connected successfully');
+    const server = app.listen(constants.PORT, () => {
+    console.log(`Server running on port ${constants.PORT}`);
+    console.log(`Environment: ${constants.NODE_ENV}`);
+    console.log(`Health: http://localhost:${constants.PORT}/health`);
 });
 
-server.on('error',(error)=>{
+    server.on('error',(error)=>{
     if(error.code == 'EADDRINUSE'){
-        console.log(`${port} already in use`);
+        console.log(`${constants.PORT} already in use`);
         process.exit(1);
     }
     else{
@@ -23,11 +26,26 @@ server.on('error',(error)=>{
     }
 
 });
+    const shutdown = async (signal) => {
+        server.close(async ()=>{
+            console.log('HTTP server closed');
+            await pool.end();
+            console.log('Database connection closed');
+            process.exit(0);
+        })
 
-process.on('SIGTERM',()=>{
-    console.log('Shutting down');
-    server.close(()=>{
-        console.log('Server is being shut down');
-        process.exit(0);
-    });
-});
+    setTimeout(()=>{
+        console.error('Forced shutdown due to timeout');
+        process.exit(1);
+    },10000);
+};
+
+    process.on('SIGTERM', () => shutdown('SIGTERM'));
+    process.on('SIGINT', () => shutdown('SIGINT'));
+} catch(error){
+    console.error('Failed to start server: ',error);
+    process.exit(1);
+} 
+}
+
+startServer();
